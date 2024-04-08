@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { PodList } from "./tableComp";
+import { PodList } from "./PodList";
 
 export default function Home() {
   return <>
