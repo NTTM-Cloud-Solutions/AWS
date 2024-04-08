@@ -1,15 +1,21 @@
-import "@/styles/globals.css"
-import { Inter as FontSans } from "next/font/google"
+import "@/styles/globals.css";
+import { ThemeProvider } from "next-themes";
+import { Inter as FontSans } from "next/font/google";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import Footer from "./footer";
+import NavBar from "./navbar";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
+});
 
-
-export default function RootLayoutProps({ children }: { children: React.ReactNode }) {
+export default function RootLayoutProps({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -19,10 +25,17 @@ export default function RootLayoutProps({ children }: { children: React.ReactNod
           fontSans.variable
         )}
       >
-        <main>
-        {children}
-        </main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NavBar />
+          <main>{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

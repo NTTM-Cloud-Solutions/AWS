@@ -1,6 +1,8 @@
+import { Button } from "@/components/ui/button";
+import { PodList } from "./tableComp";
 
 export default function Home() {
   return <>
-  <h1>hello tomer this is nir</h1>
+  <PodList/>
   </>;
 }
