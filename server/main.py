@@ -1,10 +1,10 @@
 import requests
 import base64
 import os
-from flask import Flask
+from flask import Flask , jsonify, render_template
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv('.env.local')
 
 
 # Get access token
@@ -51,21 +51,28 @@ def fetch_show_data(show_id, access_token):
 
     if response.status_code == 200:
         show_data = response.json()
-        print(show_data)  # Do something with the show data
+        return show_data
     else:
         print(f"Failed to fetch show data. Status code: {response.status_code}")
+        return None
 
 
 
 # get the access token from the .env file and show id from .env file
-access_token = os.getenv("SPOTIFY_ACCESS_TOKEN")
-show_id = os.getenv("SPOTIFY_SHOW_ID")
-fetch_show_data(show_id, access_token)
 
 app = Flask(__name__)
 @app.route('/')
 def hello():
-    return 'Hello, Tomer!'
-
+    access_token = os.getenv("SPOTIFY_ACCESS_TOKEN")
+    show_id = os.getenv("SPOTIFY_SHOW_ID")
+    show_data = fetch_show_data(show_id, access_token)
+    if show_data is not None:
+        return render_template('show_data.html', name=show_data['name'], 
+                                publisher=show_data['publisher'],
+                                description=show_data['description'],
+                                release_date=show_data['episodes']['items'][0]['release_date'],) 
+    else:
+        return "Failed to fetch show data"
+    
 if __name__ == '__main__':
     app.run(port=5001, debug=True)

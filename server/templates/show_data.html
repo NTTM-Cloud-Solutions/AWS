@@ -1,0 +1,28 @@
+<!-- make the initial strcture of a html page-->
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <title>show data</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <!-- make th for name, release date, href -->
+            <th>{{name}}</th>
+            <th>{{publisher}}</th>
+            <th>{{release_date}}</th>
+            <th>{{href}}</th>
+            <th>{{description}}</th>
+            <th>{{html_description}}</th>
+
+        </tr>
+        {% for show in shows %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ description }}</td>
+            <td>{{ publisher }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
