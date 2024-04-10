@@ -14,18 +14,18 @@ export function BookList() {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Choose Book</CardTitle>
+        <CardTitle></CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>
-        <Button variant="outline" className="w-full mb-2">All Books</Button>
-        <Button variant="outline" className="w-full mb-2">Book 1</Button>
-        <Button variant="outline" className="w-full mb-2">Book 2</Button>
-        <Button variant="outline" className="w-full mb-2">Book 3</Button>
-        <Button variant="outline" className="w-full mb-2">Book 4</Button>
-        <Button variant="outline" className="w-full mb-2">Book 5</Button>
-        <Button variant="outline" className="w-full mb-2">Book 6</Button>
-        <Button variant="outline" className="w-full mb-2">Book 7</Button>
+        <Button variant="outline" className="w-full mb-5">All Books</Button>
+        <Button variant="outline" className="w-full mb-5">Book 1</Button>
+        <Button variant="outline" className="w-full mb-5">Book 2</Button>
+        <Button variant="outline" className="w-full mb-5">Book 3</Button>
+        <Button variant="outline" className="w-full mb-5">Book 4</Button>
+        <Button variant="outline" className="w-full mb-5">Book 5</Button>
+        <Button variant="outline" className="w-full mb-5">Book 6</Button>
+        <Button variant="outline" className="w-full mb-5">Book 7</Button>
       </CardContent>
     </Card>
   )
