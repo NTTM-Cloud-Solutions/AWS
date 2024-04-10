@@ -18,6 +18,7 @@ export function BookList() {
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>
+        <Button variant="outline" className="w-full mb-2">All Books</Button>
         <Button variant="outline" className="w-full mb-2">Book 1</Button>
         <Button variant="outline" className="w-full mb-2">Book 2</Button>
         <Button variant="outline" className="w-full mb-2">Book 3</Button>
