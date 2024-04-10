@@ -67,10 +67,18 @@ def hello():
     show_id = os.getenv("SPOTIFY_SHOW_ID")
     show_data = fetch_show_data(show_id, access_token)
     if show_data is not None:
-        return render_template('show_data.html', name=show_data['name'], 
-                                publisher=show_data['publisher'],
-                                description=show_data['description'],
-                                release_date=show_data['episodes']['items'][0]['release_date'],) 
+        first_episode = show_data['episodes']['items'][1]
+        return render_template('show_data.html', 
+                               name=first_episode['name'], 
+                               publisher=show_data['publisher'],
+                               id=show_data['id'],
+                               images=show_data['images'][0]['url'],
+                               uri=show_data['uri'],
+                               description=first_episode['description'],
+                               release_date=first_episode['release_date'],
+                            #        <!-- release_date, duration in secondes(convert from ms) -->
+                               duration=first_episode['duration_ms']/1000/60
+                               )
     else:
         return "Failed to fetch show data"
     

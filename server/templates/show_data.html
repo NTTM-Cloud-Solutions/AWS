@@ -5,24 +5,20 @@
     <title>show data</title>
 </head>
 <body>
-    <table>
-        <tr>
-            <!-- make th for name, release date, href -->
-            <th>{{name}}</th>
-            <th>{{publisher}}</th>
-            <th>{{release_date}}</th>
-            <th>{{href}}</th>
-            <th>{{description}}</th>
-            <th>{{html_description}}</th>
 
-        </tr>
-        {% for show in shows %}
-        <tr>
-            <td>{{ name }}</td>
-            <td>{{ description }}</td>
-            <td>{{ publisher }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <p id="name">Episode Name: {{name}}</p>
+    <p id="publisher">{{publisher}}</p>
+    <p id="id">Episode ID: {{id}}</p>
+    <p id="images">
+        <img src="{{images}}" alt="image" style="width:100px;height:100px;">
+    </p>
+    <p id="description">Episode description: {{description}}</p>
+    <p id="uri">Episode URI: {{uri}}</p>
+    <!-- release_date, episode_name, duration in secondes(convert from ms) -->
+    <p id="release_date">Episode Release Date: {{release_date}}</p>
+    <p id="duration">Time: {{duration}} mins</p>
+
+
+
 </body>
 </html>
