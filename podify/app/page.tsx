@@ -7,7 +7,7 @@ export default function Home() {
       <div style={{ flex: 1 }}>
         <BookList />
       </div>
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 3 }}>
         <PodList />
       </div>
     </div>

@@ -12,25 +12,20 @@ import {
 
 export function BookList() {
   return (
-    <Card className="w-[350px]">
+    <Card className="w-full">
       <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
+        <CardTitle>Choose Book</CardTitle>
+        <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-            </div>
-            <div className="flex flex-col space-y-1.5">
-            </div>
-          </div>
-        </form>
+        <Button variant="outline" className="w-full mb-2">Book 1</Button>
+        <Button variant="outline" className="w-full mb-2">Book 2</Button>
+        <Button variant="outline" className="w-full mb-2">Book 3</Button>
+        <Button variant="outline" className="w-full mb-2">Book 4</Button>
+        <Button variant="outline" className="w-full mb-2">Book 5</Button>
+        <Button variant="outline" className="w-full mb-2">Book 6</Button>
+        <Button variant="outline" className="w-full mb-2">Book 7</Button>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <Button>Deploy</Button>
-      </CardFooter>
     </Card>
   )
 }
