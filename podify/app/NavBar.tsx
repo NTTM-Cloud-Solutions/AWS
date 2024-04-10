@@ -54,7 +54,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 export default function NavBar() {
   return (
-    <div className="flex justify-center py-4 mb-20">
+    <div className="flex justify-center py-4 mb-1§0">
       <NavigationMenu>
         <NavigationMenuList>
         <NavigationMenuItem>
