@@ -3,8 +3,8 @@ import { ThemeProvider } from "next-themes";
 import { Inter as FontSans } from "next/font/google";
 
 import { cn } from "@/lib/utils";
-import Footer from "./footer";
-import NavBar from "./navbar";
+import Footer from "./Footer";
+import NavBar from "./NavBar";
 
 const fontSans = FontSans({
   subsets: ["latin"],
