@@ -1,24 +1,21 @@
-<!-- make the initial strcture of a html page-->
 <!DOCTYPE html>
 <html lang="he">
-<head>
-    <title>show data</title>
-</head>
-<body>
-
-    <p id="name">Episode Name: {{name}}</p>
-    <p id="publisher">{{publisher}}</p>
-    <p id="id">Episode ID: {{id}}</p>
-    <p id="images">
-        <img src="{{images}}" alt="image" style="width:100px;height:100px;">
-    </p>
-    <p id="description">Episode description: {{description}}</p>
-    <p id="uri">Episode URI: {{uri}}</p>
-    <!-- release_date, episode_name, duration in secondes(convert from ms) -->
-    <p id="release_date">Episode Release Date: {{release_date}}</p>
-    <p id="duration">Time: {{duration}} mins</p>
-
-
-
-</body>
+    <head>
+        <title>show data</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='data.css') }}">
+    </head>
+    <body>
+        <div id="content">
+            <p id="name">Episode Name: {{name}}</p>
+            <p id="publisher">{{publisher}}</p>
+            <p id="id">Episode ID: {{id}}</p>
+            <p id="images">
+                <img src="{{images}}" alt="image" style="width:100px;height:100px;">
+            </p>
+            <p id="description" >Episode description: {{description|safe}}</p>
+            <p id="uri">Episode URI: {{uri}}</p>
+            <p id="release_date">Episode Release Date: {{release_date}}</p>
+            <p id="duration">Time: {{duration}} mins</p>
+        </div>
+    </body>
 </html>

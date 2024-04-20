@@ -1,0 +1,15 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    direction: ltr;
+}
+#name, #publisher, #id, #description, #uri, #release_date, #duration {
+    margin-bottom: 20px;
+}
+img {
+    border-radius: 50%;
+}
+#description {
+    direction: rtl;
+}

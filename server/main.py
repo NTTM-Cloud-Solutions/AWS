@@ -1,11 +1,11 @@
 import requests
 import base64
 import os
-from flask import Flask , jsonify, render_template
+from flask import Flask , render_template
 from dotenv import load_dotenv
+import json
 
 load_dotenv('.env.local')
-
 
 # Get access token
 def get_access_token():
@@ -38,7 +38,6 @@ def get_access_token():
 os.environ['SPOTIFY_ACCESS_TOKEN'] = get_access_token()
 print(os.getenv('SPOTIFY_ACCESS_TOKEN'))
 
-# Fetch show data
 def fetch_show_data(show_id, access_token):
     url = f"https://api.spotify.com/v1/shows/{show_id}"
 
@@ -51,6 +50,9 @@ def fetch_show_data(show_id, access_token):
 
     if response.status_code == 200:
         show_data = response.json()
+        with open('episodes.json', 'w', encoding='utf-8') as f:
+            json.dump(show_data['episodes'], f, indent=4)
+
         return show_data
     else:
         print(f"Failed to fetch show data. Status code: {response.status_code}")
@@ -58,29 +60,31 @@ def fetch_show_data(show_id, access_token):
 
 
 
-# get the access token from the .env file and show id from .env file
+def render_show_data(access_token, show_id):
+        show_data = fetch_show_data(show_id, access_token)
+        if show_data is not None:
+            first_episode = show_data['episodes']['items'][2]
+            description = first_episode['description'].replace('.', '.<br>')
+            return render_template('show_data.html', 
+                                   name=first_episode['name'], 
+                                   publisher=show_data['publisher'],
+                                   id=show_data['id'],
+                                   images=show_data['images'][0]['url'],
+                                   uri=show_data['uri'],
+                                   description=description,
+                                   release_date=first_episode['release_date'],
+                                   duration=first_episode['duration_ms']/1000/60
+                                   )
+        else:
+            return "Failed to fetch show data"
+
 
 app = Flask(__name__)
 @app.route('/')
 def hello():
     access_token = os.getenv("SPOTIFY_ACCESS_TOKEN")
     show_id = os.getenv("SPOTIFY_SHOW_ID")
-    show_data = fetch_show_data(show_id, access_token)
-    if show_data is not None:
-        first_episode = show_data['episodes']['items'][1]
-        return render_template('show_data.html', 
-                               name=first_episode['name'], 
-                               publisher=show_data['publisher'],
-                               id=show_data['id'],
-                               images=show_data['images'][0]['url'],
-                               uri=show_data['uri'],
-                               description=first_episode['description'],
-                               release_date=first_episode['release_date'],
-                            #        <!-- release_date, duration in secondes(convert from ms) -->
-                               duration=first_episode['duration_ms']/1000/60
-                               )
-    else:
-        return "Failed to fetch show data"
+    return render_show_data(access_token, show_id)
     
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
