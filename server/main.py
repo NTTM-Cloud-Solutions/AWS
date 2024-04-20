@@ -61,22 +61,25 @@ def fetch_show_data(show_id, access_token):
 
 
 def render_show_data(access_token, show_id):
-        show_data = fetch_show_data(show_id, access_token)
-        if show_data is not None:
-            first_episode = show_data['episodes']['items'][2]
-            description = first_episode['description'].replace('.', '.<br>')
-            return render_template('show_data.html', 
-                                   name=first_episode['name'], 
-                                   publisher=show_data['publisher'],
-                                   id=show_data['id'],
-                                   images=show_data['images'][0]['url'],
-                                   uri=show_data['uri'],
-                                   description=description,
-                                   release_date=first_episode['release_date'],
-                                   duration=first_episode['duration_ms']/1000/60
-                                   )
-        else:
-            return "Failed to fetch show data"
+    with open('episodes.json', 'r', encoding='utf-8') as f:
+        show_data = json.load(f)
+    if show_data is not None:
+        episodes = show_data['items'][1:4]
+        episode_data = []
+        for episode in episodes:
+            description = episode['description'].replace('.', '.<br>')
+            episode_data.append({
+                'name': episode['name'],
+                'id': episode['id'],
+                'images': episode['images'][0]['url'],
+                'uri': episode['uri'],
+                'description': description,
+                'release_date': episode['release_date'],
+                'duration': episode['duration_ms'] / 1000 / 60
+            })
+        return render_template('show_data.html', episodes=episode_data)
+    else:
+        return "Failed to fetch show data"
 
 
 app = Flask(__name__)
@@ -84,6 +87,7 @@ app = Flask(__name__)
 def hello():
     access_token = os.getenv("SPOTIFY_ACCESS_TOKEN")
     show_id = os.getenv("SPOTIFY_SHOW_ID")
+    # fetch_show_data(show_id, access_token)
     return render_show_data(access_token, show_id)
     
 if __name__ == '__main__':
