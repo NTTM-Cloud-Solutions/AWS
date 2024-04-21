@@ -23,6 +23,7 @@
 5. Run the main.py file:
     ```
     python main.py
+    or 
     ```
 
 6. To exit:
