@@ -1,7 +1,8 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { PodList } from "./PodList";
 
 export default function Home() {
   return <>
-  <h1>hello tomer</h1>
+  <PodList/>
   </>;
 }
