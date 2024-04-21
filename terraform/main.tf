@@ -32,10 +32,23 @@ resource "aws_security_group" "example" {
     cidr_blocks = ["10.0.0.0/16"]
     }
 }
+# Create RDS instance
+resource "aws_db_instance" "example" {
+  allocated_storage    = 20
+  engine               = "mysql"
+  engine_version       = "5.7"
+  instance_class       = "db.t2.micro"
+  username             = "foo"
+  password             = "bar"
+  parameter_group_name = "default.mysql5.7"
+  publicly_accessible  = true
+  skip_final_snapshot  = true
+  vpc_security_group_ids = [aws_security_group.example.id]
+}
 
 # Create an EC2 instance
 resource "aws_instance" "example" {
-  ami           = "ami-0c55b159cbfafe1f0"
+  ami           = "ami-0f673487d7e5f89ca"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.example.id
   vpc_security_group_ids = [aws_security_group.example.id]
