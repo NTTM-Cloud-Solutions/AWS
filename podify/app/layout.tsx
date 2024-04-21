@@ -32,7 +32,10 @@ export default function RootLayoutProps({
           disableTransitionOnChange
         >
           <NavBar />
-          <main>{children}</main>
+          <main>
+            
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>
