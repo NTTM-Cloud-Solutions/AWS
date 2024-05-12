@@ -20,6 +20,7 @@ export function SelectBook({ selectedBook, onSelectBook }: { selectedBook: strin
         <SelectGroup>
           <SelectLabel>Harry Potter Series</SelectLabel>
           <SelectItem value="0">Show All Books</SelectItem>
+          <SelectLabel>Harry Potter Spesific Book</SelectLabel>
           <SelectItem value="1">Harry Potter and the Sorcerer's Stone (Book 1)</SelectItem>
           <SelectItem value="2">Harry Potter and the Chamber of Secrets (Book 2)</SelectItem>
           <SelectItem value="3">Harry Potter and the Prisoner of Azkaban (Book 3)</SelectItem>
