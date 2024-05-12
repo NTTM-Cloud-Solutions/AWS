@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Link } from "lucide-react";
 
 // Adding a TypeScript interface for episode type, adjust according to actual data structure
 interface Episode {
@@ -58,7 +59,7 @@ export function PodList({ episodes }: PodListProps) {
             <TableCell className="font-medium">{episode.id}</TableCell>
             <TableCell>{episode.name}</TableCell>
             <TableCell>{episode.release_date}</TableCell>
-            <TableCell className="text-right">{episode.uri}</TableCell>
+            <TableCell><a href={episode.uri}>*</a></TableCell>
           </TableRow>
         ))}
       </TableBody>
