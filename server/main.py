@@ -4,6 +4,16 @@ import os
 from flask import Flask , render_template
 from dotenv import load_dotenv
 import json
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 load_dotenv('.env.local')
 
@@ -13,7 +23,7 @@ def get_access_token():
     client_secret = os.getenv("CLIENT_SECRET")
 
     if client_id is None or client_secret is None:
-        print("Missing client ID or client secret") ############## exit here
+        print(bcolors.WARNING + "Missing client ID or client secret" + bcolors.ENDC) ############## exit here
         exit()
 
     # Encode client ID and client secret in base64
