@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import axios from "axios";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,17 +20,8 @@ import { Input } from "@/components/ui/input";
 const podcastEpisodeSchema = z.object({
   id: z.string(),
   name: z.string(),
-  description: z.string(),
-  images: z.array(
-    z.object({
-      url: z.string(),
-      height: z.number(),
-      width: z.number(),
-    })
-  ),
   uri: z.string(),
   release_date: z.string(),
-  duration: z.number(),
 });
 
 export default function AddPod() {
@@ -39,34 +30,41 @@ export default function AddPod() {
     defaultValues: {
       id: "123",
       name: "The Joe Rogan Experience",
-      description: "The Joe Rogan Experience podcast",
-      images: [
-        {
-          url: "https://example.com/joe-rogan.jpg",
-          height: 640,
-          width: 640,
-        },
-      ],
       uri: "https://example.com/joe-rogan",
       release_date: "2021-09-01",
-      duration: 3600,
     },
   });
-  function onSubmit(values: z.infer<typeof podcastEpisodeSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+
+  async function onSubmit(values: z.infer<typeof podcastEpisodeSchema>) {
+    try {
+      const response = await axios.post('/api/podcast-episodes', values);
+      console.log("Podcast episode created successfully:", response.data);
+      // You can add additional logic to handle the success case
+    } catch (error) {
+      console.error("Error creating podcast episode:", error);
+      // You can add additional logic to handle the error case
+    }
+    // console.log("Form values:", values);
   }
 
-  const { control, handleSubmit } = useForm();
-
   return (
-    <>
-      <div className="max-w-md mx-auto">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <div className="max-w-md mx-auto">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
-            control={control}
+            control={form.control}
+            name="id"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>ID</FormLabel>
+                <FormControl>
+                  <Input placeholder="Episode ID" {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
@@ -78,19 +76,19 @@ export default function AddPod() {
             )}
           />
           <FormField
-            control={control}
-            name="description"
+            control={form.control}
+            name="uri"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>URI</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Episode Description" {...field} />
+                  <Input placeholder="Episode URI" {...field} />
                 </FormControl>
               </FormItem>
             )}
           />
           <FormField
-            control={control}
+            control={form.control}
             name="release_date"
             render={({ field }) => (
               <FormItem>
@@ -101,23 +99,10 @@ export default function AddPod() {
               </FormItem>
             )}
           />
-          {/* add image */}
-          <FormField
-            control={control}
-            name="images"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Image</FormLabel>
-                <FormControl>
-                  <Input type="file" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-            <Button type="submit">Submit</Button>
-          </form>
-        </Form>
-      </div>
-    </>
+          {/* You can add the images field as needed */}
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
+    </div>
   );
 }

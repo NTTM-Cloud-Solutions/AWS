@@ -14,27 +14,7 @@ import { Link } from "lucide-react";
 interface Episode {
   id: string;
   name: string;
-  description: string;
-  html_description: string;
-  duration_ms: number;
-  explicit: boolean;
-  audio_preview_url: string;
-  external_urls: {
-    spotify: string;
-  };
-  href: string;
-  images: Array<{
-    height: number;
-    url: string;
-    width: number;
-  }>;
-  is_externally_hosted: boolean;
-  is_playable: boolean;
-  language: string;
-  languages: string[];
   release_date: string;
-  release_date_precision: string;
-  type: string;
   uri: string;
 }
 

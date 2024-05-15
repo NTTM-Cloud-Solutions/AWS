@@ -49,10 +49,10 @@ export default function NavBar() {
                     </a>
                   </NavigationMenuLink>
                 </li>
-                <ListItem href="AddPod" title="Add New Podcast">
+                <ListItem href="/AddPod" title="Add New Podcast">
                   Add a new podcast to the list.
                 </ListItem>
-                <ListItem href="DelPod" title="Delete a Podcast">
+                <ListItem href="/DelPod" title="Delete a Podcast">
                   Delete a podcast from the list.
                 </ListItem>
               </ul>
