@@ -1,5 +1,7 @@
 # AWS Project
 
+## By Nir Tuttnauer and Tomer Mizrahi
+
 ## Description
 This project involves creating a sample podcaster site where users can manage and enjoy podcasts. The application is built using Next.js for the frontend, Flask for the backend, and RDS for the database. The project utilizes AWS services including Lambda, API Gateway, EC2, and RDS. Terraform is used for infrastructure management.
 
@@ -8,8 +10,8 @@ To set up and run this project, follow the steps below:
 
 1. **Clone the repository**
     ```bash
-    git clone <your-repo-url>
-    cd <repository-directory>
+    git clone "https://github.com/NTTM-Cloud-Solutions/AWS.git"
+    cd AWS
     ```
 
 2. **Create an RDS DB**
