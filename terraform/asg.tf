@@ -1,9 +1,10 @@
-resource "aws_launch_template" "asg-launch-template" {
-  name = "web_servers_lt"
-  image_id = local.ami
-  key_name = "colman2024"
-  instance_type   = "t2.micro"
-  vpc_security_group_ids = [ aws_security_group.web_servers.id, aws_security_group.internal.id ]
+resource "aws_launch_template" "asg_launch_template" {
+  name          = "web_servers_lt"
+  image_id      = local.ami
+  key_name      = "EC2"
+  instance_type = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.web_servers.id, aws_security_group.internal.id]
+  
   tag_specifications {
     resource_type = "instance"
     tags = {
@@ -14,16 +15,16 @@ resource "aws_launch_template" "asg-launch-template" {
 }
 
 resource "aws_autoscaling_group" "asg" {
-  name     = "myASG"
+  name                 = "myASG"
   launch_template {
-    id = aws_launch_template.asg-launch-template.id
-    version = aws_launch_template.asg-launch-template.latest_version
+    id      = aws_launch_template.asg_launch_template.id
+    version = aws_launch_template.asg_launch_template.latest_version
   }
   vpc_zone_identifier = module.vpc.public_subnets
-  min_size             = 0
-  max_size             = 2
-  desired_capacity     = 2
-  health_check_type    = "ELB"
+  min_size            = 0
+  max_size            = 2
+  desired_capacity    = 2
+  health_check_type   = "ELB"
 
   tag {
     key                 = "Name"
@@ -32,7 +33,12 @@ resource "aws_autoscaling_group" "asg" {
   }
 }
 
-resource "aws_autoscaling_attachment" "asg_alb_attachment_http" {
-  autoscaling_group_name = resource.aws_autoscaling_group.asg.name
-  lb_target_group_arn    = aws_lb_target_group.http.arn
+resource "aws_autoscaling_attachment" "asg_alb_attachment_app3000" {
+  autoscaling_group_name = aws_autoscaling_group.asg.name
+  lb_target_group_arn    = aws_lb_target_group.app3000.arn
+}
+
+resource "aws_autoscaling_attachment" "asg_alb_attachment_app3010" {
+  autoscaling_group_name = aws_autoscaling_group.asg.name
+  lb_target_group_arn    = aws_lb_target_group.app3010.arn
 }

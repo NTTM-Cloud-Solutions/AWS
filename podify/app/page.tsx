@@ -7,8 +7,9 @@ export default function Home() {
   const [episodes, setEpisodes] = useState<any[]>([]);
   const [filteredEpisodes, setFilteredEpisodes] = useState<any[]>([]);
   const { selectedBook, setSelectedBook } = useBook();
+  
   useEffect(() => {
-    fetch("/api/podcast-episodes/")
+    fetch("/api/podcast-episodes")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched data:", data); // Check what the data looks like
