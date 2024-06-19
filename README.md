@@ -41,6 +41,8 @@ To set up and run this project, follow the steps below:
 ```bash
 #!/bin/bash
 
+# VERY IMPORTANT you need to run this as root... before running the script use: sudo -i
+
 # Log the start of the script
 echo "Starting user data script..." > /var/log/user-data.log
 
