@@ -7,71 +7,39 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
+import { Link } from "lucide-react";
 
-const episodes = [
-  {
-    ep: "1",
-    name: "Harry and the Philosopher's Stone",
-    link: ">",
-    date: "2022-01-01",
-  },
-  {
-    ep: "2",
-    name: "Hermonie and the Chamber of Secrets",
-    link: ">",
-    date: "2022-02-15",
-  },
-  {
-    ep: "3",
-    name: "Ron and the Prisoner of Azkaban",
-    link: ">",
-    date: "2022-03-30",
-  },
-  {
-    ep: "4",
-    name: "Griffindor and the Goblet of Fire",
-    link: ">",
-    date: "2022-04-10",
-  },
-  {
-    ep: "5",
-    name: "Hufflepuff and the Order of the Phoenix",
-    link: ">",
-    date: "2022-05-20",
-  },
-  {
-    ep: "6",
-    name: "Slytherin and the Half-Blood Prince",
-    link: ">",
-    date: "2022-06-05",
-  },
-  {
-    ep: "7",
-    name: "Ravenclaw and the Deathly Hallows",
-    link: ">",
-    date: "2022-07-15",
-  },
-]
+// Adding a TypeScript interface for episode type, adjust according to actual data structure
+interface Episode {
+  id: string;
+  name: string;
+  release_date: string;
+  uri: string;
+}
 
-export function PodList() {
+interface PodListProps {
+  episodes: Episode[]; // Expecting episodes array as a prop
+}
+
+export function PodList({ episodes }: PodListProps) {
   return (
     <Table>
       <TableHeader>
-        <TableRow>
-          <TableHead>Episode</TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Date</TableHead>
-          <TableHead className="text-right">Link</TableHead>
+        <TableRow className="text-right">
+          <TableHead className="text-right">ID</TableHead>
+          <TableHead className="text-right">שם</TableHead>
+          <TableHead className="text-right">תאריך</TableHead>
+          <TableHead className="text-right">לינק</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {episodes.map((episode) => (
-          <TableRow key={episode.ep}>
-            <TableCell className="font-medium">{episode.ep}</TableCell>
+          <TableRow key={episode.id}>
+            <TableCell className="font-medium">{episode.id}</TableCell>
             <TableCell>{episode.name}</TableCell>
-            <TableCell>{episode.date}</TableCell>
-            <TableCell className="text-right">{episode.link}</TableCell>
+            <TableCell>{episode.release_date}</TableCell>
+            <TableCell><a href={episode.uri}>*</a></TableCell>
           </TableRow>
         ))}
       </TableBody>

@@ -1,0 +1,8 @@
+terraform/init.sh
+terraform/install.sh
+./terraform/
+.terraform.*
+variables-secrets.tf
+init.sh
+terraform.tfstate
+terraform.tfstate.backup

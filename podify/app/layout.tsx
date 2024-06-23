@@ -1,3 +1,4 @@
+'use client'
 import "@/styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import { Inter as FontSans } from "next/font/google";
@@ -5,6 +6,8 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
+import { useEffect, useState } from "react";
+import { BookProvider } from "@/contexts/BookContext";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -16,8 +19,9 @@ export default function RootLayoutProps({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="he" suppressHydrationWarning dir="rtl">
       <head />
       <body
         className={cn(
@@ -31,12 +35,14 @@ export default function RootLayoutProps({
           enableSystem
           disableTransitionOnChange
         >
+          <BookProvider>
+
           <NavBar />
           <main>
-            
             {children}
-          </main>
-          <Footer />
+              </main>
+            <Footer />
+          </BookProvider>
         </ThemeProvider>
       </body>
     </html>
